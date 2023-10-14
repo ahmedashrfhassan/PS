@@ -2,35 +2,31 @@ class Solution {
     public boolean checkInclusion(String s1, String s2) {
         if (s1.length() > s2.length()) {
             return false;}
-        Map<Character, Integer> charToOccurrence = new HashMap<>();
-        for (int i = 0; i< s1.length() ; i++) {
-            Character key = s1.charAt(i);
-            charToOccurrence.computeIfPresent(key, (c, integer) -> integer + 1);
-            charToOccurrence.putIfAbsent(key, 1);
+        int[] wordOccurrence = new int[26];
+        for (int i = 0; i< s1.length()  ; i++) {
+            char key = s1.charAt(i);
+            wordOccurrence[key-'a']++;
         }
-        for (int i=0 ; i<s2.length(); i++) {
-                int indication = confirmItsPermutation(s2, i, s1.length(), charToOccurrence);
-                if (indication == i+s1.length()+1) {
-                    return true;
-                } else if (indication == -1) {
-                    return false;
-                } else {
-                    i = indication -1;
-                }
-
+        int[] compareArr = new int[26];
+        for (int i =0; i < s1.length() -1 ; i++) {
+            compareArr[s2.charAt(i) - 'a'] += 1;
+        }
+        for (int i=0 ; i<=s2.length()-s1.length(); i++) {
+            int j = i + s1.length() - 1;
+            compareArr[s2.charAt(j)-'a']++;
+            boolean bool = checkPermutation(wordOccurrence, compareArr, s1);
+            if (bool) return true;
+            compareArr[s2.charAt(i)-'a'] -= 1;
         }
         return false;
     }
 
-    private int confirmItsPermutation(String s2, int i, int length, Map<Character, Integer> wordMao) {
-        Map<Character, Integer> copyMap = new HashMap<>(wordMao);
-        for (int j=i; j < i+length ; j++) {
-            if (j >= s2.length()) return -1;
-            Integer i1Value = copyMap.get(s2.charAt(j));
-            if (i1Value == null) return j+1;
-            else if ( i1Value <= 0) return i+1;
-            else copyMap.compute(s2.charAt(j), (k, v) -> v - 1);
+    private boolean checkPermutation(int[] wordOccurrence, int[] compareArr, String s1) {
+        for (int i = 0 ; i < s1.length() ; i++) {
+            char charr = s1.charAt(i);
+            if (wordOccurrence[charr-'a'] != compareArr[charr-'a']) return false;
         }
-        return i+length+1;
+        return true;
     }
+
 }
