@@ -10,8 +10,9 @@ class Solution {
         for (int i = 1 ; i < nums.length ; i++) {
                 leftProduct[i] = leftProduct[i - 1] * nums[i - 1];
                 nums[i-1] = rightProduct[i-1] * leftProduct[i-1];
-                if (i == nums.length-1) nums[i] = leftProduct[i];
         }
+        nums[nums.length-1] = leftProduct[nums.length-1] * rightProduct[nums.length-1];
+
         return nums;
     }
 
