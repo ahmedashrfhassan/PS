@@ -8,14 +8,12 @@ class Solution {
         for (int i = nums.length-2 ; i >= 0 ; i--) {
             rightProduct[i] = rightProduct[i + 1] * nums[i + 1];
         }
-        for (int i = 0 ; i < nums.length ; i++) {
-            if (i==0) result[i] = leftProduct[i] * rightProduct[i];
-            else {
+        for (int i = 1 ; i < nums.length ; i++) {
                 leftProduct[i] = leftProduct[i - 1] * nums[i - 1];
-                result[i] = rightProduct[i] * leftProduct[i];
-            }
+                nums[i-1] = rightProduct[i-1] * leftProduct[i-1];
+                if (i == nums.length-1) nums[i] = leftProduct[i];
         }
-        return result;
+        return nums;
     }
 
 }
