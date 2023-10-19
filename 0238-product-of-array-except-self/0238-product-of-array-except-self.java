@@ -4,7 +4,6 @@ class Solution {
         rightProduct[nums.length - 1] = 1;
         int[] leftProduct = new int[nums.length];
         leftProduct[0] = 1;
-        int[] result = new int[nums.length];
         for (int i = nums.length-2 ; i >= 0 ; i--) {
             rightProduct[i] = rightProduct[i + 1] * nums[i + 1];
         }
