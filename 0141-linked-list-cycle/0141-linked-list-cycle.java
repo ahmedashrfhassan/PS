@@ -10,14 +10,16 @@
  * }
  */
 public class Solution {
-    public boolean hasCycle(ListNode head) {
-        if (head == null) return false;
-        HashMap<ListNode, Integer> nodeToIndex = new HashMap<>();
+
+        public boolean hasCycle(ListNode head) {
+                    if (head == null) return false;
+
+        Set<ListNode> nodeToIndex = new HashSet<>();
         int index = 0;
         while (head.next != null){
-            nodeToIndex.put(head, index);
+            nodeToIndex.add(head);
             index++;
-            if (nodeToIndex.get(head.next) != null) return true;
+            if (nodeToIndex.contains(head.next)) return true;
             head = head.next;
         }
         return false;
