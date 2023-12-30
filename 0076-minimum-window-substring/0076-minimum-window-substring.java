@@ -26,7 +26,7 @@ class Solution {
                     resultString = s.substring(start, end+1);
                 }
             }
-            if (!mapsMatching(charToCount, probableResult)) {
+            else {
                 end++;
             }
         }
