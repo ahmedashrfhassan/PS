@@ -25,4 +25,16 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0242-valid-anagram](https://github.com/ahmedashrfhassan/PS/tree/master/0242-valid-anagram) |
+## Array
+|  |
+| ------- |
+| [0053-maximum-subarray](https://github.com/ahmedashrfhassan/PS/tree/master/0053-maximum-subarray) |
+## Divide and Conquer
+|  |
+| ------- |
+| [0053-maximum-subarray](https://github.com/ahmedashrfhassan/PS/tree/master/0053-maximum-subarray) |
+## Dynamic Programming
+|  |
+| ------- |
+| [0053-maximum-subarray](https://github.com/ahmedashrfhassan/PS/tree/master/0053-maximum-subarray) |
 <!---LeetCode Topics End-->
