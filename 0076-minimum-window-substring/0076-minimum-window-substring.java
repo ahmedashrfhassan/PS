@@ -1,75 +1,42 @@
 class Solution {
-    public String minWindow(String s, String t) {
-                if (s.length() == 47373) {
-            return "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ";
+    public String minWindow(String originalString, String givenString) {
+        HashMap<Character, Integer> givenStringMap = new HashMap<>(givenString.length());
+        for (Character c : givenString.toCharArray()) {
+            givenStringMap.put(c, givenStringMap.getOrDefault(c, 0) + 1);
         }
-
-        Map<Character, Long> charToCount = new HashMap<>();
-        for(char ch : t.toCharArray()) {
-            charToCount.put(ch, charToCount.getOrDefault(ch, 0L) + 1);
-        }
-
-        Map<Character, Long> probableResult = new HashMap<>();
-        String resultString = "";
-        int start = 0, end = 0, min = Integer.MAX_VALUE;
-        for (; end < s.length();) {
-            if (!mapsMatching(charToCount, probableResult)) {
-                addLetterAtEnd(probableResult, charToCount, s.charAt(end));
-            } else {
-                removeLetterAtStart(probableResult, charToCount, s.charAt(start));
-                start++;
+        String subString = "";
+        HashMap<Character, Integer> currentWordMap = new HashMap<>();
+        int start = 0, end = 0, minLength = Integer.MAX_VALUE, requiredLength = givenStringMap.size(), formed=0;
+        while (end < originalString.length()) {
+            char key = originalString.charAt(end);
+            currentWordMap.put(key, currentWordMap.getOrDefault(key, 0) + 1);
+            if (givenStringMap.containsKey(key) && currentWordMap.get(key).equals(givenStringMap.get(key))) {
+                formed++;
             }
-            if (mapsMatching(charToCount, probableResult)) {
-                int diff = end - start + 1 ;
-                if (diff < min) {
-                    min = diff;
-                    resultString = s.substring(start, end+1);
+            if (requiredLength == formed) {
+                if (end - start + 1 < minLength) {
+                    minLength = end - start + 1;
+                    subString = originalString.substring(start, end + 1);
+                }
+                while (start <= end && formed == requiredLength) {
+                    if (end - start + 1 < minLength) {
+                        minLength = end - start + 1;
+                        subString = originalString.substring(start, end + 1);
+                    }
+                    char startKey = originalString.charAt(start);
+                    currentWordMap.put(startKey, currentWordMap.get(startKey) - 1);
+                    if (currentWordMap.get(startKey) == 0) {
+                        currentWordMap.remove(startKey);
+                    }
+                    if (givenStringMap.containsKey(startKey) && (!currentWordMap.containsKey(startKey)
+                            || currentWordMap.get(startKey) < givenStringMap.get(startKey)) ) {
+                        formed--;
+                    }
+                    start++;
                 }
             }
-            else {
-                end++;
-            }
+            end++;
         }
-        while (end > start) {
-            removeLetterAtStart(probableResult, charToCount, s.charAt(start));
-        if (mapsMatching(charToCount, probableResult)) {
-            int diff = end - start + 1 ;
-            if (diff < min) {
-                min = diff;
-                resultString = s.substring(start, end);
-            }
-        }
-            start++;
-        }
-        return resultString;
-    }
-
-        private boolean mapsMatching (Map < Character, Long > charToCount, Map < Character, Long > probableResult){
-            return charToCount.size() == probableResult.size()
-                    &&
-                    probableResult.entrySet()
-                            .stream()
-                            .noneMatch((k) -> k.getValue() < charToCount.get(k.getKey()));
-        }
-
-        private void addLetterAtEnd (Map < Character, Long > probableResult, Map < Character, Long > charToCount,char c)
-        {
-            if (charToCount.containsKey(c)) {
-                Long occurrence = probableResult.get(c);
-                if (occurrence != null) {
-                    probableResult.replace(c, occurrence + 1);
-                } else probableResult.put(c, 1L);
-            }
-
-        }
-
-        private void removeLetterAtStart(Map<Character, Long> probableResult, Map<Character, Long> charToCount, char c) {
-        if (charToCount.containsKey(c)) {
-            Long occurrence = probableResult.get(c);
-            if (occurrence != null) {
-                if (occurrence == 1) probableResult.remove(c);
-                else probableResult.replace(c, occurrence - 1);
-            }
-        }
+        return subString;
     }
 }
