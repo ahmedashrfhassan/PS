@@ -43,4 +43,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0076-minimum-window-substring](https://github.com/ahmedashrfhassan/PS/tree/master/0076-minimum-window-substring) |
+## Math
+|  |
+| ------- |
+| [0007-reverse-integer](https://github.com/ahmedashrfhassan/PS/tree/master/0007-reverse-integer) |
 <!---LeetCode Topics End-->
