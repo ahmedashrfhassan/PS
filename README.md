@@ -23,6 +23,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0076-minimum-window-substring](https://github.com/ahmedashrfhassan/PS/tree/master/0076-minimum-window-substring) |
 | [0242-valid-anagram](https://github.com/ahmedashrfhassan/PS/tree/master/0242-valid-anagram) |
+| [0344-reverse-string](https://github.com/ahmedashrfhassan/PS/tree/master/0344-reverse-string) |
 ## Sorting
 |  |
 | ------- |
@@ -47,4 +48,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0007-reverse-integer](https://github.com/ahmedashrfhassan/PS/tree/master/0007-reverse-integer) |
+## Two Pointers
+|  |
+| ------- |
+| [0344-reverse-string](https://github.com/ahmedashrfhassan/PS/tree/master/0344-reverse-string) |
 <!---LeetCode Topics End-->
